@@ -10,12 +10,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import static com.codeup.adlister.util.Helper.formatReturnAddress;
+
 @WebServlet(name = "DeleteAdServlet", urlPatterns = "/ads/delete")
 
 public class DeleteAdServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        if (request.getSession().getAttribute("user") == null){
-            response.sendRedirect("/login");
+        if (request.getSession().getAttribute("user") == null) {
+            String address = formatReturnAddress(request.getRequestURL(),request.getQueryString());
+            response.sendRedirect("/login?returnTo=" + address);
             return;
         }
         Long id = Long.parseLong(request.getParameter("id"));

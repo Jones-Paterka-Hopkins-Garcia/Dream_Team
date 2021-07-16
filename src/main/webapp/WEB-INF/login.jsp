@@ -11,6 +11,7 @@
     <div class="container">
         <h1>Please Log In</h1>
         <form action="/login" method="POST">
+            <input type="hidden" name="returnTo" value="${returnTo}"/>
             <div class="form-group">
                 <div id="vanish">${wrongUPMessage}</div>
                 <label for="username">Username</label>

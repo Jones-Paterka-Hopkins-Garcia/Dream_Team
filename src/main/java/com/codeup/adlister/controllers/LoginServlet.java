@@ -13,10 +13,15 @@ import java.io.PrintWriter;
 @WebServlet(name = "controllers.LoginServlet", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //This next line will tell you the longest amount of time a session can remain idle
+        //before the server invalidates it / removes its data
+        //int timeOut = request.getSession().getMaxInactiveInterval();
         if (request.getSession().getAttribute("user") != null) {
+
             response.sendRedirect("/profile");
             return;
         }
+        request.setAttribute("returnTo", request.getParameter("returnTo"));
         request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
     }
 
@@ -26,6 +31,7 @@ public class LoginServlet extends HttpServlet {
         User user = DaoFactory.getUsersDao().findByUsername(username);
         PrintWriter out = response.getWriter();
 
+        String returnTo = request.getParameter("returnTo");
         if (user == null) {
             out.println("<script>");
             out.println("alert('Please enter a username and password');");
@@ -39,7 +45,13 @@ public class LoginServlet extends HttpServlet {
 
             if (validAttempt) {
                 request.getSession().setAttribute("user", user);
-                response.sendRedirect("/profile");
+                if(returnTo==null || returnTo.isEmpty()) {
+                    response.sendRedirect("/profile");
+                }
+                else
+                {
+                    response.sendRedirect(returnTo);
+                }
             }else {
                 request.setAttribute("username", username);
                 request.setAttribute("wrongAlert", wrongAlert);
