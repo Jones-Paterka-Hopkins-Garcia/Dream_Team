@@ -8,8 +8,8 @@ DROP TABLE IF EXISTS ads_categories;
 CREATE TABLE users
 (
     id       INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    username VARCHAR(240) NOT NULL,
-    email    VARCHAR(240) NOT NULL,
+    username VARCHAR(240) NOT NULL UNIQUE,
+    email    VARCHAR(240) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     PRIMARY KEY (id)
 );
