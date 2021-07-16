@@ -11,11 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static com.codeup.adlister.util.Helper.formatReturnAddress;
+
 @WebServlet(name = "controllers.EditAdServlet", urlPatterns = "/ads/edit")
 public class EditAdServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         if (request.getSession().getAttribute("user") == null) {
-            response.sendRedirect("/login");
+            String address = formatReturnAddress(request.getRequestURL(),request.getQueryString());
+            response.sendRedirect("/login?returnTo=" + address);
             return;
         }
 
