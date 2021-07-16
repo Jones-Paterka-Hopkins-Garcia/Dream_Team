@@ -1,5 +1,6 @@
 package com.codeup.adlister.dao;
 
+import com.codeup.adlister.models.Ad;
 import com.codeup.adlister.models.Category;
 import com.mysql.cj.jdbc.Driver;
 
@@ -42,7 +43,7 @@ public class MySQLCategoriesDao implements Categories {
         PreparedStatement stmt = null;
 
         try {
-            stmt = connection.prepareStatement("Select * from categories inner join ads_categories on categories.id = ads_categories.ads_id inner join ads on ads_categories.categories_id = ads.id WHERE ads.id = ?");
+            stmt = connection.prepareStatement("Select * from categories inner join ads_categories on categories.id = ads_categories.categories_id inner join ads on ads_categories.ads_id = ads.id WHERE ads.id = ?");
             stmt.setLong(1, adId);
             ResultSet rs = stmt.executeQuery();
             return createCategoriesFromResults(rs);
@@ -122,6 +123,20 @@ public class MySQLCategoriesDao implements Categories {
 
 
 
+    }
+
+    public Boolean deleteCategoriesForAd(Ad ad)
+    {
+        //Delete all references to this category from the ads_categories table
+        String deleteQuery = "DELETE FROM ads_categories WHERE ads_id = ?;";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(deleteQuery);
+            stmt.setLong(1, ad.getId());
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            throw new RuntimeException("Cannot delete category", e);
+        }
     }
 
 

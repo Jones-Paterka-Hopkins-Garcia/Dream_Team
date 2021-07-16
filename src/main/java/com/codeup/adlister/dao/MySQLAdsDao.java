@@ -94,6 +94,22 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
+    public Long edit(Ad ad) {
+        try {
+            String insertQuery = "update ads set title = ?, description=? where ads.id =?";
+            PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, ad.getTitle());
+            stmt.setString(2, ad.getDescription());
+            stmt.setLong(3, ad.getId());
+            stmt.executeUpdate();
+            ResultSet rs = stmt.getGeneratedKeys();
+            rs.next();
+            return ad.getId();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error editing ad: " + ad.getTitle(), e);
+        }
+    }
+
     private static Ad extractAd(ResultSet rs) throws SQLException {
         return new Ad(
                 rs.getLong("id"),
