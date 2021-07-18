@@ -1,12 +1,14 @@
 package com.codeup.adlister.dao;
 
 import com.codeup.adlister.models.User;
+import com.codeup.adlister.models.Ad;
 import com.mysql.cj.jdbc.Driver;
 
 import java.sql.*;
+import java.util.List;
 
 public class MySQLUsersDao implements Users {
-    private Connection connection;
+    private static Connection connection;
 
     public MySQLUsersDao(Config config) {
         try {
@@ -31,6 +33,18 @@ public class MySQLUsersDao implements Users {
             return extractUser(stmt.executeQuery());
         } catch (SQLException e) {
             throw new RuntimeException("Error finding a user by username", e);
+        }
+    }
+
+    @Override
+    public User findByEmail(String email){
+        String query = "SELECT * FROM users WHERE email = ? LIMIT 1";
+        try{
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setString(1, email);
+            return extractUser(stmt.executeQuery());
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding a user by email", e);
         }
     }
 
@@ -61,6 +75,32 @@ public class MySQLUsersDao implements Users {
             rs.getString("email"),
             rs.getString("password")
         );
+    }
+
+    public static List<Ad> findAdByUsername(User username) {
+        PreparedStatement stmt = null;
+        try {
+            stmt = connection.prepareStatement("SELECT * FROM ads WHERE user_id LIKE ?");
+            stmt.setLong(1, username.getId());
+            ResultSet rs = stmt.executeQuery();
+            return MySQLAdsDao.createAdsFromResults(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving your ads.", e);
+        }
+    }
+
+    @Override
+    public User findByUserId(long userId) {
+        String query = "SELECT * FROM users WHERE id = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setLong(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            return extractUser(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException("error finding user id",e);
+        }
+
     }
 
 }

@@ -11,11 +11,16 @@
 
 <div class="container">
     <h1>Here Are all the ads!</h1>
-
     <c:forEach var="ad" items="${ads}">
-        <div class="col-md-6">
-            <h2>${ad.title}</h2>
-            <p>${ad.description}</p>
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <h2><a href="ads/show?id=${ad.id}&userId=${ad.userId}" class="text-secondary nav-link">${ad.title}</a></h2>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">${ad.description}</p>
+                </div>
+            </div>
         </div>
     </c:forEach>
 </div>
