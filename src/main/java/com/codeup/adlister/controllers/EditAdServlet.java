@@ -33,7 +33,6 @@ public class EditAdServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        User user = (User) request.getSession().getAttribute("user");
         Ad ad = new Ad(
                 Long.parseLong(request.getParameter("id")),
                 Long.parseLong(request.getParameter("user_id")),

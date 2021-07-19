@@ -25,9 +25,15 @@
             <div class="card-body">
                 <p class="card-text">${ad.description}</p>
             </div>
-            <form method="post" action="/ads/delete">
+            <form method="post" action="${pageContext.request.contextPath}/ads/delete">
                 <button type="submit" name="id" value="${ad.id}" class="btn btn-primary">
                     Delete
+                </button>
+            </form>
+            <form method="get" action="${pageContext.request.contextPath}/ads/edit">
+                <button type="submit" name="id" value="${ad.id}"  class="btn btn-primary">
+
+                    Edit
                 </button>
             </form>
         </div>
