@@ -16,4 +16,6 @@ public interface Ads {
     Ad showAd(long id);
 
     List<Ad> searchByTitle(String query);
+
+    List<Ad> searchByDescription(String query);
 }
