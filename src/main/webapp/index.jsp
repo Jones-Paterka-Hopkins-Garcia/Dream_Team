@@ -18,6 +18,7 @@ body {
     background-image: linear-gradient(to top, #0f1215 35%, black 35%);
 }
 #cybertruck {
+    z-index:-1; /*make the rain go over the black background of the truck */
     width: 650px;
     height: 210px;
     position: absolute;
@@ -60,6 +61,7 @@ body {
     height: 100vh;
     background-image: url("/img/rain.png");
     animation: rain 0.3s linear infinite;
+
 }
 @keyframes rain{
     0%{
