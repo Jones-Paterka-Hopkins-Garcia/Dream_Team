@@ -19,7 +19,7 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-<%--                    Code Below is need to display ad--%>
+<%--                    Code Below is need to display ads from the user--%>
                 <h2><a href="ads/show?id=${ad.id}&userId=${ad.userId}" class="text-secondary nav-link">${ad.title}</a></h2>
             </div>
             <div class="card-body">

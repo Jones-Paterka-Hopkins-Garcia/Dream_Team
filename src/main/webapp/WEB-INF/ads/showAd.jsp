@@ -16,7 +16,7 @@
         <div class="col">
             <h1>${ad.title}</h1>
             <p>${ad.description}</p>
-            <p>This ad posted by: ${user.getUsername()}</p>
+            <p>This ad posted by: ${user.getUsername()}</p> <%--This code shows which user posted the ad on the individual ad page.--%>
         </div>
     </div>
 </div>

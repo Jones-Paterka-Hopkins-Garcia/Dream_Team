@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+//This servlet is used to display and individual ad. It finds the user by using the findByUserID method in the getUsersDao. This is seen on line 22.
+
 @WebServlet(name ="controllers.AdShowServlet", urlPatterns = "/ads/show")
 public class AdShowServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
