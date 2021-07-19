@@ -67,7 +67,7 @@ public class Helper {
     }
 
     public static boolean emailNotExist(String email){
-        User emailTest = DaoFactory.getUsersDao().findByUsername(email);
+        User emailTest = DaoFactory.getUsersDao().findByEmail(email);
         return emailTest == null;
     }
 }
