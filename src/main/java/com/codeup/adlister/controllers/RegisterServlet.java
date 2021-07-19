@@ -57,17 +57,17 @@ public class RegisterServlet extends HttpServlet {
        // this are our alert messages for existing email and users
         String usernameExistMessage = "<script>alert('The Username already exists, try again');</script>";
         String emailExistMessage = "<script>alert('The email already exist with another user, try again');</script>";
-        String emaiNUsernameExistMessage = "<script>alert('The username and email already exist with another user, try again');</script>";
+        String emailNUsernameExistMessage = "<script>alert('The username and email already exist with another user, try again');</script>";
 
         // this is checking if the email an the username already exist on out datatabase
         if (!usernameNotExist && !emailNotExist) {
-            request.setAttribute("emaiNUsernameExistMessage", emaiNUsernameExistMessage);
+            request.setAttribute("emailNUsernameExistMessage", emailNUsernameExistMessage);
             request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
         } else if (!emailNotExist) {
             request.setAttribute("username", username);
             request.setAttribute("emailExistMessage", emailExistMessage);
             request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
-        } else {
+        } else if (!usernameNotExist){
             request.setAttribute("email", email);
             request.setAttribute("usernameExistMessage", usernameExistMessage);
             request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
