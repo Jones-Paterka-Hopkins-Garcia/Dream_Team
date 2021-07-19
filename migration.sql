@@ -1,9 +1,10 @@
 USE adlister_db;
-
+DROP TABLE IF EXISTS ads_categories;
+DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS ads;
 DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS categories;
-DROP TABLE IF EXISTS ads_categories;
+
+
 
 CREATE TABLE users
 (
