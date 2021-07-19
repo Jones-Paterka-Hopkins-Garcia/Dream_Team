@@ -23,7 +23,7 @@
         </div>
 
 
-        TODO: loop through drop down list items and see if they should be auto selected
+
         <div class="form-group">
             <select name="categories" multiple style="height:100px;">
                 <c:forEach items="${categories}" var="category">

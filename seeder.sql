@@ -14,11 +14,11 @@ VALUES ('Tesla', 'Model 3', 4),
 
 -- we need to figure out how to tie categories to ads....
 INSERT INTO categories (category)
-VALUES ('sedans'),
-       ('coupe'),
-       ('trucks'),
+VALUES ('Sedans'),
+       ('Coupe'),
+       ('Trucks'),
        ('SUV'),
-       ('vintage'),
-       ('off-road'),
-       ('utility'),
-       ('vehicle parts');
+       ('Vintage'),
+       ('Off-road'),
+       ('Utility'),
+       ('Vehicle parts');
